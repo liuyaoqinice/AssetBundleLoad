@@ -1,0 +1,30 @@
+﻿Unity资源加载方式介绍：
+    1，拖到组件上进行加载
+    
+    2，Resources.Load  
+        Resources文件夹的大小有限大约是2g ，所以在实际的开发当中我们很少使用这个方法
+    去开发代码
+    
+    3，AssetBundle 加载
+        现在最广泛使用的加载方式 ，    
+        
+    4，AssetDataBase.LoadAtPath
+         var obj= UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/GameData/Prefabs/Attack.prefab");
+         var go = Instantiate(obj);
+         只有在Editor 的情况下才能正常使用
+         
+Xml序列化：
+    Xml转为类 
+    1.类转Xml 
+        相关的Api ： 
+            流文件的创建
+                var sm=new FileStream(Application.dataPath+"/test.xlm",FileMode.Create,FileAccess.ReadWrite,FileShare.ReadWrite);
+            流文件的写入
+                var sw =new StreamWriter(sm,Encoding.UTF8);
+            创建序列化对象及获取需要序列化的类型
+                var xml=new XmlSerializer(data.GetType());//获取需要序列化的类型
+            进行序列化    
+             xml.Serialize(sw,data);//序列化
+                        sw.Close();
+                        sm.Close();
+    Xml转为2进制
